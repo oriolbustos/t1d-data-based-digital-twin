@@ -103,14 +103,14 @@ class GANModel:
         self.settings.total_steps_gan = i
         return history
 
-    def discriminator_loop(self, patient_data: TrainingData, i: int = 0, log: bool = False):
+    def discriminator_loop(self, patient_data: TrainingData):
         x_real_bg, condition_inputs, y_real_label = self.generate_real_samples(patient_data, self.settings.batch_size_gan)
         x_fake_bg, y_fake_label = self.generate_fake_samples(condition_inputs)
         d_loss_real, _ = self.d_model.train_on_batch([condition_inputs, x_real_bg], y_real_label)
         d_loss_fake, _ = self.d_model.train_on_batch([condition_inputs, x_fake_bg], y_fake_label)
         return d_loss_real, d_loss_fake
 
-    def generator_loop(self, patient_data: TrainingData, i: int = 0, log: bool = False):
+    def generator_loop(self, patient_data: TrainingData):
         latent_input = generate_latent_points(self.settings.latent_dimensions, self.settings.batch_size_gan)
         x_real_bg, condition_inputs, y_real_label = self.generate_real_samples(patient_data, self.settings.batch_size_gan)
         gan_inputs = list(condition_inputs) + [latent_input]
