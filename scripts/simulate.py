@@ -68,7 +68,7 @@ class SimulatorVAEGAN:
                 inputs.append(input_data)
         return inputs
 
-    def simulate(self, sim_data, generator, simulation_length):
+    def simulate(self, sim_data, generator, simulation_length, scalers_path: Path):
         """
         Generate blood glucose data for a specific patient using their GAN model and calculate metrics.
 
@@ -103,11 +103,11 @@ class SimulatorVAEGAN:
         )
         sim_data.gen_bg_unscaled = unscale_data(
             gen_bg_profile_scaled,
-            'misc/',
+            scalers_path,
         )
         sim_data.std_gen_bg_unscaled = unscale_data(
             std_output_profile,
-            'misc/',
+            scalers_path,
         )
         sim_data.gen_bg_scaled = gen_bg_profile_scaled
 

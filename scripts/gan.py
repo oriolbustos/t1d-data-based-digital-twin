@@ -90,8 +90,8 @@ class GANModel:
 
         for i in tqdm(range(self.settings.total_steps_gan), total=self.settings.total_steps_gan, desc="GAN Training", unit="step"):
 
-            d_real, d_fake = self.discriminator_loop(patient_data, i)
-            g_total, g_adv, g_l2 = self.generator_loop(patient_data, i)
+            d_real, d_fake = self.discriminator_loop(patient_data)
+            g_total, g_adv, g_l2 = self.generator_loop(patient_data)
 
             history["step"].append(i + 1)
             history["d_loss_real"].append(float(d_real))
