@@ -16,6 +16,7 @@ from utils import unscale_data
 from tensorflow import Tensor
 from utils import apply_transformation_params
 from types import SimpleNamespace
+from tqdm import tqdm
 
 class SimulatorVAEGAN:
     def __init__(self):
@@ -81,15 +82,12 @@ class SimulatorVAEGAN:
         total_time_steps = tf.shape(sim_data.real_bg_unscaled)[0]
         simulation_steps = min(int(288 * simulation_length), int(total_time_steps))
 
-        print(f'Simulating for {simulation_steps} time steps...')
-        print(f'Available time steps: {total_time_steps}')
-
         latent_dim = 18
 
         initial_latent = np.random.normal(loc=0, scale=1.0, size=(latent_dim,))
         latent_inputs = self.generate_latent_wiener_process(initial_latent, simulation_steps, latent_dim)
 
-        for i in range(simulation_steps-1):
+        for i in tqdm(range(simulation_steps-1)):
             inputs = self.prepare_curve_inputs(i, sim_data, latent_inputs)
             # latent_input, *condition_inputs = inputs[0], inputs[1:]
 
