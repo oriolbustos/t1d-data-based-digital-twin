@@ -78,7 +78,12 @@ pip install -r requirements.txt
 </pre>
 
 <h2 id="quickstart" style="color:#4FC3F7;">Quickstart on Google Colab</h2>
--
+<ol style="line-height:1.8; color:#cfd8dc;">
+  <li>Go to Google Drive and create a folder with the name: `t1d-data-based-digital-twin'.</li>
+  <li>Upload the repo folders inside the newly created folder, excluding any folder starting with `.` or `_` (eg. .git, .venv etc.)</li>
+  <li>Open the notebooks inside the 'workshop-colab' folder, they are an adapted version from the 'workshops'' notebooks.</li>
+  <li>Run set-up and grant access to your Drive when prompted so that the notebook can access the data and scripts.</li>
+</ol>
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
 
