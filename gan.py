@@ -32,7 +32,6 @@ class GANModel:
         self.settings.y_real_label = 1
         self.settings.y_fake_label = -1
         self.settings.latent_dimensions = 18
-        self.settings.frequency_logging_in_steps = 100
         self.settings.glucose_dim = int(90/5) # prediction horizon 90 min, data every 5 min
         self.settings.gan_inputs = ['BG', 'PI', 'RA']
 
@@ -86,45 +85,39 @@ class GANModel:
         return gan_model
 
     def train(self, patient_data: TrainingData):
-        self.settings.total_steps_gan = (
-            len(patient_data.scPI) // self.settings.batch_size_gan
-        ) * self.settings.n_epochs_gan
+        self.settings.total_steps_gan = (len(patient_data.scPI) // self.settings.batch_size_gan) * self.settings.n_epochs_gan
+        history = {"step": [], "d_loss_real": [], "d_loss_fake": [], "g_loss": [], "g_adversarial": [], "g_l2": []}
 
-        for i in tqdm(range(self.settings.total_steps_gan), total=self.settings.total_steps_gan, desc='GAN Training', unit='step'):
-            save_interval = (i + 1) % self.settings.frequency_logging_in_steps
+        for i in tqdm(range(self.settings.total_steps_gan), total=self.settings.total_steps_gan, desc="GAN Training", unit="step"):
 
-            if save_interval == 0:
-                self.discriminator_loop(patient_data, i, log=True)
-                self.generator_loop(patient_data, i, log=True)
+            d_real, d_fake = self.discriminator_loop(patient_data, i)
+            g_total, g_adv, g_l2 = self.generator_loop(patient_data, i)
 
-            else:
-                self.discriminator_loop(patient_data)
-                self.generator_loop(patient_data)
+            history["step"].append(i + 1)
+            history["d_loss_real"].append(float(d_real))
+            history["d_loss_fake"].append(float(d_fake))
+            history["g_loss"].append(float(g_total))
+            history["g_adversarial"].append(float(g_adv))
+            history["g_l2"].append(float(g_l2))
 
         self.settings.total_steps_gan = i
+        return history
 
     def discriminator_loop(self, patient_data: TrainingData, i: int = 0, log: bool = False):
         x_real_bg, condition_inputs, y_real_label = self.generate_real_samples(patient_data, self.settings.batch_size_gan)
-
         x_fake_bg, y_fake_label = self.generate_fake_samples(condition_inputs)
         d_loss_real, _ = self.d_model.train_on_batch([condition_inputs, x_real_bg], y_real_label)
         d_loss_fake, _ = self.d_model.train_on_batch([condition_inputs, x_fake_bg], y_fake_label)
-
-        if log:
-            print(f'd_loss_real={d_loss_real:.3f}')
-            print(f'd_loss_fake={d_loss_fake:.3f}')
+        return d_loss_real, d_loss_fake
 
     def generator_loop(self, patient_data: TrainingData, i: int = 0, log: bool = False):
         latent_input = generate_latent_points(self.settings.latent_dimensions, self.settings.batch_size_gan)
         x_real_bg, condition_inputs, y_real_label = self.generate_real_samples(patient_data, self.settings.batch_size_gan)
-
-        gan_inputs = list(condition_inputs) + [latent_input]  # noqa: RUF005
+        gan_inputs = list(condition_inputs) + [latent_input]
         gan_labels = [y_real_label, x_real_bg]
-
         g_loss, adversarial_loss, l2_loss = self.gan_model.train_on_batch(gan_inputs, gan_labels)
+        return g_loss, adversarial_loss, l2_loss
 
-        if log:
-            print(f'g_loss={g_loss:.3f}, adversarial_loss={adversarial_loss:.3f}, l2_loss={l2_loss:.3f}')
 
     def generate_real_samples(self, dataset, batch_size):
         """
