@@ -58,44 +58,118 @@
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
 
-<h2 id="quickstart" style="color:#4FC3F7;">Quickstart on Google Colab</h2>
-<ol style="line-height:1.8; color:#cfd8dc;">
-  <li>Go to Google Drive and create a folder with the name: `t1d-data-based-digital-twin'.</li>
-  <li>Go to Google Drive and create a folder with the name: `t1d-data-based-digital-twin'.</li>
-  <li>Upload the repo folders inside the newly created folder, excluding any folder starting with `.` or `_` (eg. .git, .venv etc.)</li>
-  <li>Open the notebooks inside the 'workshop-colab' folder, they are an adapted version from the 'workshops'' notebooks.</li>
-  <li>Run set-up and grant access to your Drive when prompted so that the notebook can access the data and scripts.</li>
-</ol>
 
+<h2 id="quickstart" style="color:#4FC3F7;">Quickstart</h2>
 
-<h2 id="quickstart" style="color:#4FC3F7;">Quickstart on Local</h2>
+## Local Setup (Recommended)
 
-<ol style="line-height:1.8; color:#cfd8dc;">
-  <li>Clone the repository</li>
-  <li>Create a Python environment (preferrably Python 3.10)</li>
-  <li>Install dependencies from <code>requirements.txt</code></li>
-  <li>Launch Jupyter and run the notebooks in <code>workshops/</code></li>
-</ol>
+### 1. (Optional) Install VS Code
+Download and install [Visual Studio Code](https://code.visualstudio.com/).
 
-<pre style="background:#0b0d10; color:#e3f2fd; padding:14px; border-radius:10px; border:1px solid #23262e; overflow:auto; margin-top:8px;">
-git clone https://github.com/oriolbustos/t1d-data-based-digital-twin.git
+---
+
+### 2. Clone the repository
+
+#### Windows (PowerShell)
+```powershell
+cd path\to\where\you\want\the\project
+git clone https://github.com/oriolbustos/t1d-data-based-digital-twin
 cd t1d-data-based-digital-twin
-</pre>
+```
 
-<pre style="background:#0b0d10; color:#e3f2fd; padding:14px; border-radius:10px; border:1px solid #23262e; overflow:auto; margin-top:8px;">
-python -m venv .venv / python3.10 -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-</pre>
+#### Mac/Linux (bash)
+```bash
+cd /path/to/where/you/want/the/project
+git clone https://github.com/oriolbustos/t1d-data-based-digital-twin
+cd t1d-data-based-digital-twin
+```
+
+---
+
+### 3. Install Python 3.10
+
+#### Windows (PowerShell)
+```powershell
+.\install-python310.ps1
+```
+
+#### Mac/Linux (bash)
+Make sure you have Python 3.10 installed. On Ubuntu/Debian:
+```bash
+sudo apt update
+sudo apt install python3.10 python3.10-venv
+```
+
+On macOS (using [Homebrew](https://brew.sh/)):
+```bash
+brew install python@3.10
+```
+
+---
+
+### 4. Create a virtual environment
+
+#### Windows (PowerShell)
+```powershell
+python3.10 -m venv .venv
+```
+
+#### Mac/Linux (bash)
+```bash
+python3.10 -m venv .venv
+```
+
+Activate it:
+
+- **Windows (PowerShell)**:
+```powershell
+.\.venv\Scripts\Activate
+```
+
+- **Mac/Linux (bash)**:
+```bash
+source .venv/bin/activate
+```
+
+---
+
+### 5. Open in VS Code
+```bash
+code .
+```
+
+- Select the **Python 3.10 virtual environment** you just created as the kernel.
+- Run the notebooks/scripts on the `workshops` folders from there.
+
+---
+
+## Quickstart on Google Colab (Version Problems May Occur)
+
+1. In your Google Drive, create a folder named:
+   ```
+   t1d-data-based-digital-twin
+   ```
+
+2. Upload the repository folders inside this folder, **excluding any hidden/system folders** (like `.git`, `.venv`, etc.).
+
+3. Open the notebooks inside the `workshop-colab` folder (they are adapted versions of the local `workshops` notebooks).
+
+4. When running setup, **grant access to your Google Drive** when prompted.
+
+5. ⚠️ **Important**: Change the system path in the notebook to match your own Google Drive folder hierarchy.
+   Example:
+   ```python
+   import sys
+   sys.path.append('/content/drive/MyDrive/t1d-data-based-digital-twin')
+   ```
+
+---
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
 
 <h2 id="data-layout" style="color:#4FC3F7;">Data</h2>
 <ul style="color:#cfd8dc; line-height:1.8;">
   <li><code>data/data_filtered.csv</code> filtered dataset for rapid experimentation</li>
-  <li><code>data/data_processed.csv</code> processed features ready for modeling</li>
-  <li><code>misc/bg_scalers.joblib</code> scalers for consistent transforms</li>
-  <li><code>misc/generator_model_*.h5</code> pretrained generators for quick runs</li>
 </ul>
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
