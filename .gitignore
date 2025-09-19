@@ -1,5 +1,5 @@
 .venv
 **pycache**
-**.h5
-
+misc/gen**.h5
 data/data_processed.csv
+workshops/model.png
