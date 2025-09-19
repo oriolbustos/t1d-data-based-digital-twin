@@ -144,5 +144,5 @@ pip install -r requirements.txt
 
 <div style="margin-top:16px; background:#0f1115; border:1px solid #23262e; border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:space-between;">
   <span style="color:#90a4ae;">Maintained by MICELab • University of Girona</span>
-  <a href="#top" style="text-decoration:none; background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px;">Back to top</a>
+  <a href="LICENSE.md" style="text-decoration:none; background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px;">View License</a>
 </div>
