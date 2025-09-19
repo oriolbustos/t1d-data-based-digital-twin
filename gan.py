@@ -34,6 +34,8 @@ class GANModel:
         self.settings.latent_dimensions = 18
         self.settings.frequency_logging_in_steps = 100
         self.settings.glucose_dim = int(90/5) # prediction horizon 90 min, data every 5 min
+        self.settings.gan_inputs = ['BG', 'PI', 'RA']
+
 
         self.g_model = decoder_model
         self.d_model = Discriminator()
