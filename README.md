@@ -24,6 +24,7 @@
   <a href="#quickstart" style="text-decoration:none; background:#1e1e1e; color:#e0f7fa; padding:10px 14px; border-radius:8px; border:1px solid #2c2c2c;">Quickstart</a>
   <a href="#data-layout" style="text-decoration:none; background:#1e1e1e; color:#e0f7fa; padding:10px 14px; border-radius:8px; border:1px solid #2c2c2c;">Data</a>
   <a href="#structure" style="text-decoration:none; background:#1e1e1e; color:#e0f7fa; padding:10px 14px; border-radius:8px; border:1px solid #2c2c2c;">Structure</a>
+  <a href="LICENSE.md" style="text-decoration:none; background:#1e1e1e; color:#e0f7fa; padding:10px 14px; border-radius:8px; border:1px solid #2c2c2c;">License</a>
 </div>
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
