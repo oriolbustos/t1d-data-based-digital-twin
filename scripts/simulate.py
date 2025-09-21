@@ -19,12 +19,9 @@ from types import SimpleNamespace
 from tqdm import tqdm
 
 class SimulatorVAEGAN:
-    def __init__(self):
+    def __init__(self, settings: SimpleNamespace):
         self.sim_data = None
-
-        self.settings = SimpleNamespace()
-        self.settings.gan_inputs = ['BG', 'PI', 'RA']
-        self.settings.glucose_dim = int(90/5) # prediction horizon 90 min, data every 5 min
+        self.settings = settings
 
     def aggregate_arrays(self, shifted_arrays: np.ndarray, time_steps: int, padding_steps: int = 0) -> np.ndarray:
         params = {
@@ -68,7 +65,7 @@ class SimulatorVAEGAN:
                 inputs.append(input_data)
         return inputs
 
-    def simulate(self, sim_data, generator, simulation_length, scalers_path: Path):
+    def simulate(self, sim_data, generator):
         """
         Generate blood glucose data for a specific patient using their GAN model and calculate metrics.
 
@@ -78,9 +75,9 @@ class SimulatorVAEGAN:
         """
         # Preprocess the patient's data
         self.generator = generator
-
+        
         total_time_steps = tf.shape(sim_data.real_bg_unscaled)[0]
-        simulation_steps = min(int(288 * simulation_length), int(total_time_steps))
+        simulation_steps = min(int(288 * self.settings.simulation_length), int(total_time_steps))
 
         latent_dim = 18
 
@@ -104,25 +101,25 @@ class SimulatorVAEGAN:
         sim_data.gen_bg_scaled = gen_bg_profile_scaled
         sim_data.gen_bg_unscaled = unscale_data(
             gen_bg_profile_scaled,
-            scalers_path,
+            self.settings.scalers_path,
         )
         sim_data.std_gen_bg_unscaled = unscale_data(
             std_output_profile,
-            scalers_path,
+            self.settings.scalers_path,
         )
         sim_data.gen_bg_unscaled = np.clip(sim_data.gen_bg_unscaled, 40, 400)
         
         # cut off first 1 hour (12 steps) to avoid initial instability
-        sim_data.gen_bg_scaled = sim_data.gen_bg_scaled[12:]
-        sim_data.gen_bg_unscaled = sim_data.gen_bg_unscaled[12:]
-        sim_data.std_gen_bg_unscaled = sim_data.std_gen_bg_unscaled[12:]
-        sim_data.real_bg_scaled = sim_data.real_bg_scaled[12:]
-        sim_data.real_bg_unscaled = sim_data.real_bg_unscaled[12:]
-        sim_data.PI_scaled = sim_data.PI_scaled[12:]
-        sim_data.PI_unscaled = sim_data.PI_unscaled[12:]
-        sim_data.RA_scaled = sim_data.RA_scaled[12:]
-        sim_data.RA_unscaled = sim_data.RA_unscaled[12:]
-        
+        sim_data.gen_bg_scaled = sim_data.gen_bg_scaled[self.settings.padding_steps:]
+        sim_data.gen_bg_unscaled = sim_data.gen_bg_unscaled[self.settings.padding_steps:]
+        sim_data.std_gen_bg_unscaled = sim_data.std_gen_bg_unscaled[self.settings.padding_steps:]
+        sim_data.real_bg_scaled = sim_data.real_bg_scaled[self.settings.padding_steps:]
+        sim_data.real_bg_unscaled = sim_data.real_bg_unscaled[self.settings.padding_steps:]
+        sim_data.PI_scaled = sim_data.PI_scaled[self.settings.padding_steps:]
+        sim_data.PI_unscaled = sim_data.PI_unscaled[self.settings.padding_steps:]
+        sim_data.RA_scaled = sim_data.RA_scaled[self.settings.padding_steps:]
+        sim_data.RA_unscaled = sim_data.RA_unscaled[self.settings.padding_steps:]
+
         return sim_data
 
     @staticmethod

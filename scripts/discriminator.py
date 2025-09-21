@@ -18,16 +18,9 @@ from types import SimpleNamespace
 
 
 class Discriminator(Model):
-    def __init__(self):
+    def __init__(self, settings: SimpleNamespace):
         super(Discriminator, self).__init__()  # noqa: UP008
-        self.settings = SimpleNamespace()
-        self.settings.weight_clip = 1
-        self.settings.in_data_shape = (1, 1)
-        self.settings.out_data_shape = (1, 18)
-        self.settings.gan_inputs = ['BG', 'PI', 'RA']
-        self.settings.learning_rate_discriminator = 0.0001
-
-
+        self.settings = settings
         self._model = self.build_discriminator()
         self.compile_model()  # discriminator is compiled here, generator only in the composite GAN model
 

@@ -22,22 +22,11 @@ from types import SimpleNamespace
 
 class GANModel:
 
-    def __init__(self, decoder_model: Model):
+    def __init__(self, settings: SimpleNamespace, decoder_model: Model):
 
-        self.settings = SimpleNamespace()
-        self.settings.ratio_generator_losses = [1, 1]
-        self.settings.learning_rate_generator = 1e-04
-        self.settings.n_epochs_gan = 50
-        self.settings.batch_size_gan = 32
-        self.settings.y_real_label = 1
-        self.settings.y_fake_label = -1
-        self.settings.latent_dimensions = 18
-        self.settings.glucose_dim = int(90/5) # prediction horizon 90 min, data every 5 min
-        self.settings.gan_inputs = ['BG', 'PI', 'RA']
-
-
+        self.settings = settings
         self.g_model = decoder_model
-        self.d_model = Discriminator()
+        self.d_model = Discriminator(settings)
         self.gan_model = self.define_gan()
 
         self.number_generator = tf.random.Generator.from_seed(1)
