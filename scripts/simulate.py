@@ -101,6 +101,7 @@ class SimulatorVAEGAN:
         gen_bg_profile_scaled, std_output_profile = self.aggregate_arrays(
             shifted_arrays, simulation_steps, 0
         )
+        sim_data.gen_bg_scaled = gen_bg_profile_scaled
         sim_data.gen_bg_unscaled = unscale_data(
             gen_bg_profile_scaled,
             scalers_path,
@@ -109,8 +110,19 @@ class SimulatorVAEGAN:
             std_output_profile,
             scalers_path,
         )
-        sim_data.gen_bg_scaled = gen_bg_profile_scaled
-
+        sim_data.gen_bg_unscaled = np.clip(sim_data.gen_bg_unscaled, 40, 400)
+        
+        # cut off first 1 hour (12 steps) to avoid initial instability
+        sim_data.gen_bg_scaled = sim_data.gen_bg_scaled[12:]
+        sim_data.gen_bg_unscaled = sim_data.gen_bg_unscaled[12:]
+        sim_data.std_gen_bg_unscaled = sim_data.std_gen_bg_unscaled[12:]
+        sim_data.real_bg_scaled = sim_data.real_bg_scaled[12:]
+        sim_data.real_bg_unscaled = sim_data.real_bg_unscaled[12:]
+        sim_data.PI_scaled = sim_data.PI_scaled[12:]
+        sim_data.PI_unscaled = sim_data.PI_unscaled[12:]
+        sim_data.RA_scaled = sim_data.RA_scaled[12:]
+        sim_data.RA_unscaled = sim_data.RA_unscaled[12:]
+        
         return sim_data
 
     @staticmethod
