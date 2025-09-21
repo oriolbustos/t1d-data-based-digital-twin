@@ -141,6 +141,7 @@ code .
 ```
 
 - Select the **Python 3.10 virtual environment** you just created as the kernel.
+- Install ipykernel when prompted to do (will be done automatically usually).
 - Run the notebooks/scripts on the `workshops` folders from there.
 
 ---
