@@ -87,11 +87,13 @@ cd t1d-data-based-digital-twin
 ---
 
 ### 3. Install Python 3.10
+Make sure to be running without any venv or conda environment activated.
 
 #### Windows (PowerShell)
 ```powershell
 .\install-python310.ps1
 ```
+Be ready to give permissions when the shield icon appears on your taskbar! Won't continue until you give the administrator account of your PC permission.
 
 #### Mac/Linux (bash)
 Make sure you have Python 3.10 installed. On Ubuntu/Debian:
