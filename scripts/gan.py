@@ -169,7 +169,7 @@ class GANModel:
         # Create new Input layers based on the flattened inputs
         generator_input = [Input(shape=input_tensor.shape[1:], name=input_tensor.name.split(':')[0]) for input_tensor in g_model_inputs]
 
-        if not generator_input[0].name.startswith('in_lat_gen'):
+        if not generator_input[0].name.startswith('in_lat'):
             raise ValueError("Last input is not 'in_lat_gen'")
 
         return generator_input
