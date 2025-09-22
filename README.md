@@ -39,7 +39,7 @@
       You will build the foundation for downstream personalization.
     </p>
     <p style="margin:10px 0 0 0;">
-      <a href="workshops/hands-on-part-a.ipynb" style="background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none;">Open Part A</a>
+      <a href="notebooks/hands-on-part-a.ipynb" style="background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none;">Open Part A</a>
     </p>
   </div>
 
@@ -49,7 +49,7 @@
       Implement and evaluate personalization strategies using the provided GAN-based components and utility modules. Fine-tune the pre-trained model and simulate data.
     </p>
     <p style="margin:10px 0 0 0;">
-      <a href="workshops/hands-on-part-b.ipynb" style="background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none;">Open Part B</a>
+      <a href="notebooks/hands-on-part-b.ipynb" style="background:#1e88e5; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none;">Open Part B</a>
     </p>
   </div>
 
@@ -146,7 +146,7 @@ code .
 
 - Select the **Python 3.10 virtual environment** you just created as the kernel.
 - Install ipykernel when prompted to do (will be done automatically usually).
-- Run the notebooks/scripts on the `workshops` folders from there.
+- Run the notebooks/scripts on the `notebooks` folders from there.
 
 ---
 
@@ -159,7 +159,7 @@ code .
 
 2. Upload the repository folders inside this folder, **excluding any hidden/system folders** (like `.git`, `.venv`, etc.).
 
-3. Open the notebooks inside the `workshop-colab` folder (they are adapted versions of the local `workshops` notebooks).
+3. Open the notebooks inside the `notebooks-colab` folder (they are adapted versions of the local `notebooks`).
 
 4. When running setup, **grant access to your Google Drive** when prompted.
 
@@ -204,10 +204,10 @@ code .
 │   ├── mini_batch_discriminator.py
 │   ├── simulate.py
 │   └── utils.py
-├── workshops
+├── notebooks
 │   ├── hands-on-part-a.ipynb
 │   └── hands-on-part-b.ipynb
-└── workshops-colab
+└── notebooks-colab
     ├── colab-hands-on-part-a.ipynb
     └── colab-hands-on-part-b.ipynb
 

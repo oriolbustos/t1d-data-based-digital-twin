@@ -2,5 +2,5 @@
 **pycache**
 misc/gen**.h5
 data/data_processed.csv
-workshops/model.png
+notebooks/model.png
 misc/gan**.h5
