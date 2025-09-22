@@ -67,6 +67,7 @@ Download and install [Visual Studio Code](https://code.visualstudio.com/).
 
 Inside VSCode go to Extensions (navigate left icons or Ctrl+Shift+X), and install Python and Jupyter.
 
+Open the terminal (Powershell if in Windows, not the cmd).
 ---
 
 ### 1. Clone the repository
@@ -184,29 +185,32 @@ code .
 
 <pre style="background:#0b0d10; color:#e3f2fd; padding:14px; border-radius:10px; border:1px solid #23262e; overflow:auto;">
 .
+├── LICENSE.md
 ├── README.md
+├── install-python3.10.ps1
+├── misc
+│   ├── data_clean.ipynb
+│   ├── data_filtered.csv
+│   ├── pretrained-model.h5
+│   └── vae_decoder_epoch_010.h5
 ├── requirements.txt
-├── scripts/
-│   ├── clip_constraint.py
-│   ├── data_classes.py
-│   ├── discriminator.py
-│   ├── gan.py
-│   ├── latent_space.py
-│   ├── loss_functions.py
-│   ├── mini_batch_discriminator.py
-│   ├── simulate.py
-│   └── utils.py
-├── data/
-│   ├── data_filtered.csv
-│   └── data_processed.csv
-├── misc/
-│   ├── bg_scalers.joblib
-│   ├── data_clean.ipynb
-│   ├── generator_model_*.h5
-│   └── model.png
-└── workshops/
-    ├── hands-on-part-a.ipynb
-    └── hands-on-part-b.ipynb
+├── scripts
+│   ├── clip_constraint.py
+│   ├── data_classes.py
+│   ├── discriminator.py
+│   ├── gan.py
+│   ├── latent_space.py
+│   ├── loss_functions.py
+│   ├── mini_batch_discriminator.py
+│   ├── simulate.py
+│   └── utils.py
+├── workshops
+│   ├── hands-on-part-a.ipynb
+│   └── hands-on-part-b.ipynb
+└── workshops-colab
+    ├── colab-hands-on-part-a.ipynb
+    └── colab-hands-on-part-b.ipynb
+
 </pre>
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
