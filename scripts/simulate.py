@@ -75,7 +75,7 @@ class SimulatorVAEGAN:
         """
         # Preprocess the patient's data
         self.generator = generator
-        
+
         total_time_steps = tf.shape(sim_data.real_bg_unscaled)[0]
         simulation_steps = min(int(288 * self.settings.simulation_length), int(total_time_steps))
 
@@ -107,8 +107,8 @@ class SimulatorVAEGAN:
             std_output_profile,
             self.settings.scalers_path,
         )
-        sim_data.gen_bg_unscaled = np.clip(sim_data.gen_bg_unscaled, 40, 400)
-        
+        # sim_data.gen_bg_unscaled = np.clip(sim_data.gen_bg_unscaled, 40, 400)
+
         # cut off first 1 hour (12 steps) to avoid initial instability
         sim_data.gen_bg_scaled = sim_data.gen_bg_scaled[self.settings.padding_steps:]
         sim_data.gen_bg_unscaled = sim_data.gen_bg_unscaled[self.settings.padding_steps:]
@@ -143,44 +143,3 @@ class SimulatorVAEGAN:
             latent_inputs[t] = latent_inputs[t - 1] + theta * (mean - latent_inputs[t - 1]) + dw * 1
 
         return latent_inputs
-
-    def save_simulation_results(
-        self,
-        gen_bg_unscaled: np.ndarray,
-        last_gen_bg_unscaled: np.ndarray,
-        gen_bg_scaled: np.ndarray,
-    ) -> None:
-        """
-        Save simulation results to a CSV file, for each simulated patient.
-        The file will contain the generated blood glucose values only. (*provisional I may change this).
-
-        Args:
-            simulated_patient (int): Index of the patient being simulated.
-            results_dir (str): Directory to save the results.
-            gen_bg_unscaled (np.ndarray): Array of unscaled blood glucose values.
-        """
-        # Make sure they are of equal length
-        length_to_use = min(len(gen_bg_unscaled), len(self.sim_data.real_bg_unscaled))
-
-        if last_gen_bg_unscaled is None or len(last_gen_bg_unscaled) != len(gen_bg_unscaled):
-            last_gen_bg_unscaled = np.zeros_like(gen_bg_unscaled)
-
-        gen_bg_unscaled_transformed = apply_transformation_params(
-            gen_bg_unscaled,
-            self.settings.validation.scale_factor_simulated_data,
-            self.settings.validation.offset_simulated_data,
-        )
-
-        results_df = pd.DataFrame(
-            {
-                'BG_gen': gen_bg_unscaled[:length_to_use],
-                'BG_real': self.sim_data.real_bg_unscaled[:length_to_use],
-                'BG_last_gen': last_gen_bg_unscaled[:length_to_use],
-                'BG_gen_transformed': gen_bg_unscaled_transformed[:length_to_use],
-                'BG_gen_scaled': gen_bg_scaled[:length_to_use],
-                'BG_real_scaled': self.sim_data.real_bg_scaled[:length_to_use],
-                'PI': np.squeeze(self.sim_data.PI_unscaled[:length_to_use]) if 'PI' in self.settings.gan_inputs else None,
-                'RA': np.squeeze(self.sim_data.RA_unscaled[:length_to_use]) if 'RA' in self.settings.gan_inputs else None,
-                'PA': np.squeeze(self.sim_data.PA_unscaled[:length_to_use]) if 'PA' in self.settings.gan_inputs else None,
-            }
-        )

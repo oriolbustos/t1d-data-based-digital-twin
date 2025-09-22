@@ -31,12 +31,6 @@ class GANModel:
 
         self.number_generator = tf.random.Generator.from_seed(1)
 
-        # self.saved_gan_models_path = Path(self.settings.train_results_path, 'saved_models', f'patient_{patient_index}')
-
-        # self.settings.sim_patient = patient_index
-
-
-
     def load_generator_model(self, filename) -> Model:
         """
         Load the pre-trained VAE generator model from the specified file.

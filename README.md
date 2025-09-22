@@ -109,6 +109,8 @@ brew install python@3.10
 
 ---
 
+If the installation run without any errors and it printed "Python 3.10" or a variant of that, the installation was correct.
+
 ### 4. Create a virtual environment
 
 #### Windows (PowerShell)
