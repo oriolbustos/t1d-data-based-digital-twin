@@ -10,7 +10,6 @@
       Hands-On training on T1D simulators, data pipelines, and personalization methods for individualized care
     </p>
     <p style="font-size:14px; color:#90a4ae; margin:8px 0 0 0;">
-      Repo: <code>t1d-data-based-digital-twin</code>
     </p>
   </div>
 
@@ -63,12 +62,14 @@
 
 ## Local Setup (Recommended)
 
-### 1. (Optional) Install VS Code
+### 0. (Optional) Install VS Code
 Download and install [Visual Studio Code](https://code.visualstudio.com/).
+
+Inside VSCode go to Extensions (navigate left icons or Ctrl+Shift+X), and install Python and Jupyter.
 
 ---
 
-### 2. Clone the repository
+### 1. Clone the repository
 
 #### Windows (PowerShell)
 ```powershell
@@ -86,7 +87,7 @@ cd t1d-data-based-digital-twin
 
 ---
 
-### 3. Install Python 3.10
+### 2. Install Python 3.10
 Make sure to be running without any venv or conda environment activated.
 
 #### Windows (PowerShell)
@@ -111,7 +112,7 @@ brew install python@3.10
 
 If the installation run without any errors and it printed "Python 3.10" or a variant of that, the installation was correct.
 
-### 4. Create a virtual environment
+### 3. Create a virtual environment
 
 #### Windows (PowerShell)
 ```powershell
@@ -137,7 +138,7 @@ source .venv/bin/activate
 
 ---
 
-### 5. Open in VS Code
+### 4. Open in VS Code
 ```bash
 code .
 ```
