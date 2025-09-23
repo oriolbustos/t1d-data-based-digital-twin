@@ -93,7 +93,7 @@ Make sure to be running without any venv or conda environment activated.
 
 #### Windows (PowerShell)
 ```powershell
-.\install-python310.ps1
+.\install-python3.10.ps1
 ```
 Be ready to give permissions when the shield icon appears on your taskbar! Won't continue until you give the administrator account of your PC permission.
 
