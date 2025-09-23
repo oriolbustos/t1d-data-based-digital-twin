@@ -4,3 +4,5 @@ misc/gen**.h5
 data/data_processed.csv
 notebooks/model.png
 misc/gan**.h5
+misc/bg_scalers.joblib
+misc/data_processed.csv
