@@ -72,6 +72,8 @@ Open the terminal (Powershell if in Windows, not the cmd).
 
 ### 1. Clone the repository
 
+(or `git fetch` & `git pull` to update it)
+
 #### Windows (PowerShell)
 ```powershell
 cd path\to\where\you\want\the\project
