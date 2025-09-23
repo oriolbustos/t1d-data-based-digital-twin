@@ -77,7 +77,7 @@ class SimulatorVAEGAN:
         self.generator = generator
 
         total_time_steps = tf.shape(sim_data.real_bg_unscaled)[0]
-        simulation_steps = min(int(288 * self.settings.simulation_length), int(total_time_steps))
+        simulation_steps = min(int(288 * self.settings.simulation_length_in_days), int(total_time_steps))
 
         latent_dim = 18
 
