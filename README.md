@@ -99,6 +99,12 @@ Make sure to be running without any venv or conda environment activated.
 ```
 Be ready to give permissions when the shield icon appears on your taskbar! Won't continue until you give the administrator account of your PC permission.
 
+In case you can't run the script because of permission problems, you can try to run this command to bypass it:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install-python3.10.ps1s
+```
+
 #### Mac/Linux (bash)
 Make sure you have Python 3.10 installed. On Ubuntu/Debian:
 ```bash
