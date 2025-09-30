@@ -189,40 +189,6 @@ code .
 
 <hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
 
-<h2 id="structure" style="color:#4FC3F7;">Repository Structure</h2>
-
-<pre style="background:#0b0d10; color:#e3f2fd; padding:14px; border-radius:10px; border:1px solid #23262e; overflow:auto;">
-.
-├── LICENSE.md
-├── README.md
-├── install-python3.10.ps1
-├── misc
-│   ├── data_clean.ipynb
-│   ├── data_filtered.csv
-│   ├── pretrained-model.h5
-│   └── vae_decoder_epoch_010.h5
-├── requirements.txt
-├── scripts
-│   ├── clip_constraint.py
-│   ├── data_classes.py
-│   ├── discriminator.py
-│   ├── gan.py
-│   ├── latent_space.py
-│   ├── loss_functions.py
-│   ├── mini_batch_discriminator.py
-│   ├── simulate.py
-│   └── utils.py
-├── notebooks
-│   ├── hands-on-part-a.ipynb
-│   └── hands-on-part-b.ipynb
-└── notebooks-colab
-    ├── colab-hands-on-part-a.ipynb
-    └── colab-hands-on-part-b.ipynb
-
-</pre>
-
-<hr style="border:none; border-top:1px solid #2c2c2c; margin:18px 0;">
-
 <h2 id="citation" style="color:#4FC3F7;">Citation</h2>
 <p style="color:#cfd8dc;">If you use this repository in academic or clinical research, please cite it.</p>
 
